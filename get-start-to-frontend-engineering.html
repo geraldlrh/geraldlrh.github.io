@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>get-start-to-frontend-engineering</title>
+    <meta charset="utf-8">
+    <style>
+      @import url(https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz);
+      @import url(https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic);
+      @import url(https://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700,400italic);
+
+      body { font-family: 'Droid Serif'; }
+      h1, h2, h3 {
+        font-family: 'Yanone Kaffeesatz';
+        font-weight: normal;
+      }
+      .remark-slide-content h1 { font-size: 3em; }
+      .remark-slide-content h2 { font-size: 2em; }
+      .remark-slide-content h3 { font-size: 1.6em; }
+      .footnote {
+        position: absolute;
+        bottom: 3em;
+      }
+      a {
+        text-decoration: none;
+        color: #3baedf;
+      }
+      li p { line-height: 1.25em; }
+      .red { color: #fa0000; }
+      .bold {
+        font-weight: bold;
+      }
+      .large { font-size: 2em; }
+      code {
+        background: #e7e8e2;
+        border-radius: 5px;
+      }
+      .remark-code, .remark-inline-code { font-family: 'Ubuntu Mono'; }
+      .remark-code-line-highlighted     { background-color: #373832; }
+      .pull-left {
+        float: left;
+        width: 47%;
+      }
+      .pull-right {
+        float: right;
+        width: 47%;
+      }
+      .pull-right ~ p {
+        clear: both;
+      }
+      #slideshow .slide .content code {
+        font-size: 0.8em;
+      }
+      #slideshow .slide .content pre code {
+        font-size: 0.9em;
+        padding: 15px;
+      }
+      .inverse {
+        background: #272822;
+        color: #777872;
+        text-shadow: 0 0 20px #333;
+      }
+      .inverse h1, .inverse h2 {
+        color: #f3f3f3;
+        line-height: 0.8em;
+      }
+      /* Slide-specific styling */
+      .define {
+        display: block;
+        background: #e7e8e2;
+        border-radius: 5px;
+        margin-left: 50px;
+        padding: 20px 10px;
+      }
+      img {
+        max-height: 500px;
+        max-width: 800px;
+      }
+      .fl img{
+        max-width: 390px;
+        float: left;
+      }
+    </style>
+  </head>
+  <body>
+    <textarea id="source">
+name: inverse
+layout: true
+class: center, middle, inverse
+---
+name: normal
+layout: true
+class: top, left
+---
+template: inverse
+
+# 前端工程浅谈
+liurihui
+2015-11-20
+
+---
+template: inverse
+
+## 什么是前端工程
+
+---
+
+### 软件工程
+
+.define[软件工程是一门研究用工程化方法构建和维护有效的、实用的和高质量的软件的学科]
+
+---
+
+### 软件工程
+
+.define[软件工程是一门研究用工程化方法构建和维护.red[有效]的、实用的和高质量的软件的学科]
+
+---
+
+### 软件工程
+
+.define[软件工程是一门研究用工程化方法构建和维护.red[有效]的、.red[实用]的和高质量的软件的学科]
+
+---
+
+### 软件工程
+
+.define[软件工程是一门研究用工程化方法构建和维护.red[有效]的、.red[实用]的和.red[高质量]的软件的学科]
+  
+--
+
+- 有IDE的支持，负责初始化工程、工程结构组织、debug、编译、打包等工作
+
+--
+
+- 有固定或者约定的工程结构，规定软件所依赖的不同类别的资源的存放路径甚至代码的写法等
+
+--
+
+- 软件依赖的资源可能来自软件开发者，也有可能是第三方，工程化需要集成对资源的获取、打包、发布、版本管理等能力
+
+--
+
+- 和其他系统的集成，如CI系统、运维系统、监控系统等
+
+---
+
+### 前端工程 
+
+- 提供开发所需的一整套运行环境，这和IDE作用类似
+
+--
+
+- 资源管理，包括资源获取、依赖处理、实时更新、按需加载、公共模块管理等
+
+--
+
+- 打通研发链路的各个环节，debug、mock、proxy、test、build、deploy等
+
+---
+
+### 前端工程 
+
+- 提供开发所需的一整套运行环境，这和IDE作用类似
+
+- .red[资源管理]，包括资源获取、依赖处理、实时更新、按需加载、公共模块管理等
+
+- 打通研发链路的各个环节，debug、mock、proxy、test、build、deploy等
+
+---
+
+### 组件化
+
+- 分而治之 分而治之 分而治之
+
+--
+
+- 代码复用
+
+---
+
+### 组件化
+
+![demo1](https://github.com/fouber/blog/raw/master/201508/assets/components.png)
+
+--
+1. 页面上的每个 .bold[独立的] 可视/可交互区域视为一个组件
+
+--
+2. .bold[每个组件对应一个工程目录]，组件所需的各种资源都在这个目录下 .bold[就近维护]
+
+--
+3. 由于组件具有独立性，因此组件与组件之间可以 .bold[自由组合]
+
+--
+4. 页面只不过是组件的容器，负责组合组件形成功能完整的界面
+
+--
+5. 当不需要某个组件，或者想要替换组件时，可以整个目录删除/替换
+
+---
+
+### 组件化
+
+.fl[![demo2](demo2.png)]
+
+--
+.fl[![demo5](https://github.com/fouber/blog/raw/master/201508/assets/split.png)]
+
+---
+
+### 目录结构
+
+![demo3](demo3.png)
+
+---
+
+### 前端工程 
+
+- 提供开发所需的一整套运行环境，这和IDE作用类似
+
+- 资源管理，包括资源获取、依赖处理、实时更新、按需加载、公共模块管理等
+
+- 组件化开发
+
+- 打通研发链路的各个环节，debug、mock、proxy、test、build、deploy等
+
+---
+
+template: inverse
+
+## why webpack?
+
+---
+
+## why webpack
+
+--
+
+- 国外很火爆，比较成熟
+
+--
+
+- 轻量，配置灵活
+
+--
+
+- 文档齐全，插件众多
+
+--
+
+- 更好的社区支持
+
+--
+- 无缝对接其他工具
+
+---
+template: inverse
+
+## how webpack work
+
+---
+### Every static asset should be a module
+![demo4](http://webpack.github.io/assets/what-is-webpack.png)
+
+---
+### lorder
+```javascript
+// webpack.config.js
+// webpack loaders的配置示例
+...
+loaders: [
+  {
+    test: /\.(css|less)$/,
+    loader: ExtractTextPlugin.extract('style', debug ? 'css!postcss!less' :
+      'css?minimize!postcss!less')
+  }, 
+  {
+    test: /\.(jpe?g|png|gif|svg)$/i,
+    loaders: [
+        'url?limit=10000&name=img/[hash:8].[name].[ext]',
+        'image?{bypassOnDebug: true, progressive:true, \
+          optimizationLevel: 3, pngquant:{quality: "65-80", speed: 4}}'
+    ]
+  }
+]
+```
+---
+### require
+```javascript
+// a.js
+// 加载css资源
+require('../css/a.css');
+
+// 加载其他js资源
+var foo = require('./widgets/foo');
+var bar = require('./widgets/bar');
+
+// 加载图片资源
+var loadingImg = require('../img/loading.png');
+
+var img = document.createElement('img');
+
+img.src = loadingImg;
+```
+
+### 指定lorder
+```javascript
+require("!style!css!less!bootstrap/less/bootstrap.less");
+// “bootstrap.less”这个资源会先被"less-loader"处理，
+// 其结果又会被"css-loader"处理，接着是"style-loader"
+// 可类比pipe操作
+```
+
+---
+### output
+```javascript
+webpackJsonp([0], {
+    /***/0:
+    /***/function(module, exports, __webpack_require__) {
+
+        __webpack_require__(6);
+
+        var foo = __webpack_require__(25);
+        var bar = __webpack_require__(26);
+
+        var loadingImg = __webpack_require__(24);
+        var img = document.createElement('img');
+
+        img.src = loadingImg;
+    },
+
+    /***/6:
+    /***/function(module, exports, __webpack_require__) {
+        ...
+    },
+
+    /***/7:
+    /***/function(module, exports, __webpack_require__) {
+        ...
+    },
+
+    /***/24:
+    /***/function(module, exports) {
+        module.exports = "data:image/png;base64,...";
+    },
+
+    /***/25:
+    /***/function(module, exports) {
+        ...
+    },
+
+    /***/26:
+    /***/function(module, exports) {
+        ...
+    }
+});
+``` 
+
+---
+template: inverse
+## 项目如何使用
+
+---
+template: inverse
+#### just show me the code!
+
+---
+### 特性
+- 组件化开发
+- js组件同步、异步（按需）加载
+- html/js/css/图片 压缩，图片base64嵌入
+- 静态资源自动加hash，导出manifest.json
+- autoprefixer，代码检测
+- 公共资源合并
+- 本地预览，热部署，发布到测试环境
+
+---
+template: inverse
+
+## 未来..
+
+---
+
+## 未来
+
+--
+
+- 耍起来，顺便埋坑。。
+
+--
+
+- 代码规范
+
+--
+
+- 更多的Wiki
+
+--
+
+- 更多的特性
+
+--
+
+- 无限的可能
+
+---
+template: inverse
+
+## 教程
+
+---
+
+## 教程
+### 前端工程
+- fouber的<a href="https://github.com/fouber/blog/issues/10">blog</a>(fis创始人之一)
+- [基于webpack搭建前端工程解决方案探索](https://github.com/chemdemo/chemdemo.github.io/issues/10)
+
+--
+
+### webpack
+- https://github.com/petehunt/webpack-howto
+- ruanyf 写的[demo](https://github.com/ruanyf/webpack-demos)
+- [React Webpack 小书](https://fakefish.github.io/react-webpack-cookbook/)
+- 官方推荐教程 http://webpack.github.io/docs/list-of-tutorials.html
+- 官方文档
+
+---
+template: inverse
+
+## Q & A
+
+    </textarea>
+    <script src="https://gnab.github.io/remark/downloads/remark-latest.min.js">
+    </script>
+    <script>
+      var slideshow = remark.create();
+    </script>
+  </body>
+</html>
