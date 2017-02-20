@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Git工作流</title>
+    <meta charset="utf-8">
+    <style>
+      @import url(https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz);
+      @import url(https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic);
+      @import url(https://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700,400italic);
+
+      body { font-family: 'Droid Serif'; }
+      h1, h2, h3 {
+        font-family: 'Yanone Kaffeesatz';
+        font-weight: normal;
+      }
+      .remark-slide-content h1 { font-size: 3em; }
+      .remark-slide-content h2 { font-size: 2em; }
+      .remark-slide-content h3 { font-size: 1.6em; }
+      .footnote {
+        position: absolute;
+        bottom: 3em;
+      }
+      a {
+        text-decoration: none;
+        color: #3baedf;
+      }
+      li p { line-height: 1.25em; }
+      .red { color: #fa0000; }
+      .bold {
+        font-weight: bold;
+      }
+      .large { font-size: 2em; }
+      code {
+        background: #e7e8e2;
+        border-radius: 5px;
+      }
+      .remark-code, .remark-inline-code { font-family: 'Ubuntu Mono'; }
+      .remark-code-line-highlighted     { background-color: #373832; }
+      .pull-left {
+        float: left;
+        width: 47%;
+      }
+      .pull-right {
+        float: right;
+        width: 47%;
+      }
+      .pull-right ~ p {
+        clear: both;
+      }
+      #slideshow .slide .content code {
+        font-size: 0.8em;
+      }
+      #slideshow .slide .content pre code {
+        font-size: 0.9em;
+        padding: 15px;
+      }
+      .inverse {
+        background: #272822;
+        color: #777872;
+        text-shadow: 0 0 20px #333;
+      }
+      .inverse h1, .inverse h2 {
+        color: #f3f3f3;
+        line-height: 0.8em;
+      }
+      /* Slide-specific styling */
+      .define {
+        display: block;
+        background: #e7e8e2;
+        border-radius: 5px;
+        margin-left: 50px;
+        padding: 20px 10px;
+      }
+      img {
+        max-height: 500px;
+        max-width: 800px;
+      }
+      .fl img{
+        max-width: 390px;
+        float: left;
+      }
+    </style>
+  </head>
+  <body>
+    <textarea id="source">
+name: inverse
+layout: true
+class: center, middle, inverse
+---
+name: normal
+layout: true
+class: top, left
+---
+template: inverse
+
+# Git工作流
+liurihui
+2017-02-10
+
+---
+template: inverse
+
+## Git
+
+---
+
+### Definition
+
+.define[Git is a free and open source distributed version control system designed to handle everything from small to very large projects with speed and efficiency.]
+
+---
+
+### Definition
+
+.define[Git is a free and open source .red[distributed] version control system designed to handle everything from small to very large projects with speed and efficiency.]
+
+---
+
+### 相比于SVN
+
+- 脱库 -> 快
+
+--
+
+- 分支与合并，指针
+
+--
+
+- 冲突，树冲突？Git的基于DAG（有向非环图）的设计比SVN的线性提交提供更好的合并追踪， 避免不必要的冲突，提高工作效率。
+
+--
+
+- 重写提交说明
+
+- 有效的支持代码审核
+
+……
+
+---
+template: inverse
+
+## workflow
+
+---
+
+### Definition
+
+.define[原意是水流，比喻项目像水流那样，顺畅、自然地向前流动，不会发生冲击、对撞、甚至漩涡。]
+
+--
+
+![workflow](http://www.ruanyifeng.com/blogimg/asset/2015/bg2015122301.png)
+
+--
+
+常见的三种工作流：
+
+- Git flow
+- Github flow
+- Gitlab flow
+
+---
+
+### Git flow
+
+--
+
+![git flow](http://images.cnblogs.com/cnblogs_com/cnblogsfans/771108/o_git-flow-nvie.png)
+
+---
+
+- Master分支 用于存放对外发布的版本，任何时候在这个分支拿到的，都是稳定的分布版。不能直接修改
+
+- Develop分支 用于日常开发，存放最新的开发版
+
+![git flow2](http://images.cnblogs.com/cnblogs_com/cnblogsfans/771108/o_git-workflow-release-cycle-1historical.png)
+
+---
+
+#### Feature分支
+
+主要是用来开发一个新的功能，一旦开发完成，我们合并回Develop分支进入下一个Release
+
+![git flow2](http://images.cnblogs.com/cnblogs_com/cnblogsfans/771108/o_git-workflow-release-cycle-2feature.png)
+
+---
+
+#### Release分支
+
+Release分支基于Develop分支创建，打完Release分之后，我们可以在这个Release分支上测试，修改Bug等。发布Release分支时，合并Release到Master和Develop。
+
+![git flow2](http://images.cnblogs.com/cnblogs_com/cnblogsfans/771108/o_git-workflow-release-cycle-3release.png)
+
+---
+
+#### Hotfix分支
+
+hotfix分支基于Master分支创建，开发完后需要合并回Master和Develop分支，同时在Master上打一个tag
+
+![git flow2](http://images.cnblogs.com/cnblogs_com/cnblogsfans/771108/o_git-workflow-release-cycle-4maintenance.png)
+
+---
+#### 优点：
+
+清晰可控
+
+--
+
+#### 缺点：
+
+基于版本发布。vs .red[持续发布]？
+
+---
+### Github flow
+
+![github flow](http://www.ruanyifeng.com/blogimg/asset/2015/bg2015122305.png)
+
+--
+
+第一步：根据需求，从master拉出新分支，不区分功能分支或补丁分支。
+
+--
+
+第二步：新分支开发完成后，或者需要讨论的时候，就向master发起一个pull request（简称PR）。
+
+--
+
+第三步：Pull Request既是一个通知，让别人注意到你的请求，又是一种对话机制，大家一起评审和讨论你的代码。对话过程中，你还可以不断提交代码。
+
+--
+
+第四步：你的Pull Request被接受，合并进master，重新部署后，原来你拉出来的那个分支就被删除。（先部署再合并也可。）
+
+---
+#### 优点：
+
+简单
+
+--
+
+#### 缺点：
+
+假设：master分支的更新与产品的发布是一致的。
+
+--
+
+提测后？预发布？
+
+---
+### Gitlab flow
+
+![gitlab flow](http://www.ruanyifeng.com/blogimg/asset/2015/bg2015122306.png)
+
+最大原则叫做"上游优先"（upsteam first），即只存在一个主分支master，它是所有其他分支的"上游"。只有上游分支采纳的代码变化，才能应用到其他分支。
+
+---
+#### 优点：
+
+Git flow 与 Github flow 的综合，吸取了两者的优点，既有适应不同开发环境的弹性，又有单一主分支的简单和便利。
+
+--
+
+#### 缺点：
+
+暂时没发现
+
+---
+template: inverse
+
+## 适合的才是最好的
+
+---
+
+![my-git-flow](my-git-flow.png)
+
+---
+
+### 实战演示
+jenkins, gitlab merge request, code review, 邮件提醒等
+
+- [gitflow-demo](http://git.mucfc.com/web/gitflow-demo)
+- [对应的jenkins任务](http://10.75.203.4:7080/job/ST_CHANNEL_WEB_GIT_DEMO/)
+
+---
+template: inverse
+
+## 教程
+
+---
+
+## 教程
+### git基础
+- [git-简明指南](http://rogerdudler.github.io/git-guide/index.zh.html)
+- [在线互动图](http://learngitbranching.js.org/)
+
+--
+
+### 工作流
+- [Git工作流程](http://www.ruanyifeng.com/blog/2015/12/git-workflow.html)
+- [Git分支管理策略](http://www.ruanyifeng.com/blog/2012/07/git.html)
+
+---
+
+## 教程
+### 进阶
+- 官方书籍 [pro git](https://git-scm.com/book/zh/v2)
+- [Git使用规范](http://www.ruanyifeng.com/blog/2015/08/git-use-process.html)
+- [彻底理解git](https://github.com/pysnow530/git-from-the-inside-out)
+
+### 其他
+- [Why git is better than SVN](http://www.worldhello.net/2012/04/12/why-git-is-better-than-svn.html)
+
+---
+template: inverse
+
+## Q & A
+
+    </textarea>
+    <script src="./remark-latest.min.js">
+    </script>
+    <script>
+      var slideshow = remark.create();
+    </script>
+  </body>
+</html>
