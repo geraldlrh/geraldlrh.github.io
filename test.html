@@ -228,6 +228,18 @@
 		<input type="text" placeholder="10">  
 		<div class="foot"></div>
 	</div>
+	<script>
+		var initHeight = window.screen.height;
+		var footDom = document.getElementsByClassName('foot')[0];
+		window.onresize = function () {
+			alert(screen.height);
+			if (window.screen.height < initHeight) {
+				footDom.style.display = 'none';
+			} else {
+				footDom.style.display = 'block';
+			}
+		}
+	</script>
 </body>
 
 </html>
