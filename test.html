@@ -229,10 +229,20 @@
 		<div class="foot"></div>
 	</div>
 	<script>
-		var initHeight = document.body.offsetHeight;
+		var winHeight = $(window).height();  //获取当前页面高度
+			$(window).resize(function () {
+				var thisHeight = $(this).height();
+				if (winHeight - thisHeight > 140) {
+					//键盘弹出
+				} else {
+					//键盘收起
+				}
+			})
+
+		var initHeight = document.body.scrollHeight;
 		var footDom = document.getElementsByClassName('foot')[0];
 		window.onresize = function () {
-			if (document.body.offsetHeight < initHeight) {
+			if (document.body.scrollHeight < initHeight) {
 				footDom.style.display = 'none';
 			} else {
 				footDom.style.display = 'block';
