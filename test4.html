@@ -36,7 +36,8 @@
   		line-height: 80px!important;
   		font-size: 32px;
   	}
-  </style>
+	</style>
+	<script src="https://gw.alipayobjects.com/as/g/h5-lib/alipayjsapi/3.1.1/alipayjsapi.inc.min.js"></script>
 </head>
 
 <body>
@@ -47,6 +48,15 @@
 	
 	<div>capture="user"</div>
 	<input type="file" name="pic3" id="pic3" accept="video/*" capture="user" />
+	<button id="J_btn" class="btn btn-default">选择视频</button>
+	<script>
+		var btn = document.querySelector('#J_btn');
+		btn.addEventListener('click', function () {
+			ap.chooseVideo(3, function (res) {
+				ap.alert(JSON.stringify(res));
+			});
+		});
+	</script>
 	<script>
 		
 	</script>
