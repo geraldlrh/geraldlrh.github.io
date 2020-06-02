@@ -49,7 +49,7 @@
 	
 	<div>capture="user"</div>
 	<input type="file" name="pic3" id="pic3" accept="video/*" capture="user" />
-	<button id="J_btn" class="btn btn-default">选择视频</button>
+	<button id="J_btn" class="btn btn-default">判断权限</button>
 	
 	<h4>选择图片 capture="camera"</h4>
 	<input type="file" name="pic4" id="pic4" accept="image/*" capture="camera" />
@@ -59,9 +59,20 @@
 	<script>
 		var btn = document.querySelector('#J_btn');
 		btn.addEventListener('click', function () {
-			ap.chooseVideo(3, function (res) {
-				ap.alert(JSON.stringify(res));
-			});
+			if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+				navigator.mediaDevices.getUserMedia({ audio: true, video: true })
+					.then(stream => alert('success1'))
+					.catch(err => alert('fail1'));
+			} else {
+				navigator.getUserMedia({ audio: true, video: true },
+					function (stream) {
+						alert('success2')
+					},
+					function (err) {
+						alert('fail2')
+					}
+				);
+			}
 		});
 
 		if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
