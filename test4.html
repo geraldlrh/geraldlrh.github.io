@@ -62,14 +62,14 @@
 			if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
 				navigator.mediaDevices.getUserMedia({ audio: true, video: true })
 					.then(stream => alert('success1'))
-					.catch(err => alert('fail1'));
+					.catch(err => alert('fail1'+err.toString()));
 			} else {
 				navigator.getUserMedia({ audio: true, video: true },
 					function (stream) {
 						alert('success2')
 					},
 					function (err) {
-						alert('fail2')
+						alert('fail2' + err.toString())
 					}
 				);
 			}
@@ -78,14 +78,14 @@
 		if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
 			navigator.mediaDevices.getUserMedia({ audio: true, video: true })
 				.then(stream => alert('success1'))
-				.catch(err => alert('fail1'));
+				.catch(err => alert('fail1' + err.toString()));
 		} else {
 			navigator.getUserMedia({ audio: true, video: true },
 				function (stream) {
 					alert('success2')
 				},
 				function (err) {
-					alert('fail2')
+					alert('fail2' + err.toString())
 				}
 			);
 		}
