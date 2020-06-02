@@ -63,6 +63,21 @@
 				ap.alert(JSON.stringify(res));
 			});
 		});
+
+		if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+			navigator.mediaDevices.getUserMedia({ audio: true, video: true })
+				.then(stream => alert('success1'))
+				.catch(err => alert('fail1'));
+		} else {
+			navigator.getUserMedia({ audio: true, video: true },
+				function (stream) {
+					alert('success2')
+				},
+				function (err) {
+					alert('fail2')
+				}
+			);
+		}
 	</script>
 	<script>
 		
