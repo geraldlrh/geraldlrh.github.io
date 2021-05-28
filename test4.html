@@ -65,6 +65,8 @@
 		btn.addEventListener('click', function () {
 			window.muapp.PagerJumpPlugin.route('muapp://functionalExt/selectedContactInfo', function(res){
 				alert(JSON.stringify(res));
+				alert(res.userphone === '');
+				alert(!res.userphone);
 			});
 		});
 
