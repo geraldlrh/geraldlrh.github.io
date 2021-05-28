@@ -89,10 +89,40 @@
 				}
 			);
 		}
+
+		window.muapp.PagerJumpPlugin.route('muapp://functionalExt/selectedContactInfo', (res = {}) => {
+			alert(JSON.stringify(res))
+    });
 	</script>
-	<script>
-		
-	</script>
+<script>
+    var ua = window.navigator.userAgent.toLowerCase();
+    if (/muapp\//i.test(ua)) {
+      var scriptsList = [
+        "<script src=\'https://munaresource/HttpRequestPlugin.js\'><\/script>", // 关闭webview
+        "<script src=\'https://munaResource/UiKitPlugin.js\'><\/script>",
+        "<script src=\'https://munaresource/PagerJumpPlugin.js\'><\/script>",
+        "<script src=\'https://munaresource/BankCardPlugin.js\'><\/script>",
+        "<script src=\'https://munaresource/ContactPlugin.js\'><\/script>",
+        "<script src=\'https://munaresource/H5TitleBarPlugin.js\'><\/script>",
+        "<script src=\'https://munaresource/GeolocationPlugin.js\'><\/script>",
+        "<script src=\'https://munaresource/CameraPlugin.js\'><\/script>",
+        "<script src=\'https://munaresource/SharePlugin.js\'><\/script>",
+        "<script src=\'https://munaresource/BioDetectorPlugin.js\'><\/script>",
+        "<script src=\'https://munaresource/DeviceFingerPlugin.js\'><\/script>",
+        "<script src=\'https://munaresource/HtmlCopyPlugin.js\'><\/script>",
+        "<script src=\'https://munaresource/IdScannerPlugin.js\'><\/script>",
+        "<script src=\'https://munaresource/LocalBiometricPlugin.js\'><\/script>",
+        "<script src=\'https://munaresource/RemotePreferencePlugin.js\'><\/script>",
+        "<script src=\'https://munaresource/MuSafeKeyboardPlugin.js\'><\/script>",
+        "<script src=\'https://munaresource/WebViewLongPressPlugin.js\'><\/script>",
+        "<script src=\'https://munaresource/LoginRegisterPlugin.js\'><\/script>",
+        "<script src=\'https://munaresource/NotificationPlugin.js\'><\/script>",
+        "<script src=\'https://munaresource/UploadFilePlugin.js\'><\/script>",
+        "<script src=\'https://munaresource/AppPlugin.js\'><\/script>",
+      ];
+      document.write(scriptsList.join(''));
+    }
+  </script>
 </body>
 
 </html>
