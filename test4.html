@@ -36,6 +36,10 @@
   		line-height: 80px!important;
   		font-size: 32px;
   	}
+		button {
+			width: 50px;
+			height: 50px;
+		}
 	</style>
 	<script src="https://gw.alipayobjects.com/as/g/h5-lib/alipayjsapi/3.1.1/alipayjsapi.inc.min.js"></script>
 </head>
@@ -59,20 +63,9 @@
 	<script>
 		var btn = document.querySelector('#J_btn');
 		btn.addEventListener('click', function () {
-			if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-				navigator.mediaDevices.getUserMedia({ audio: true, video: true })
-					.then(stream => alert('success1'))
-					.catch(err => alert('fail1'+err.toString()));
-			} else {
-				navigator.getUserMedia({ audio: true, video: true },
-					function (stream) {
-						alert('success2')
-					},
-					function (err) {
-						alert('fail2' + err.toString())
-					}
-				);
-			}
+			window.muapp.PagerJumpPlugin.route('muapp://functionalExt/selectedContactInfo', function(res){
+				alert(JSON.stringify(res));
+			});
 		});
 
 		if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
@@ -90,9 +83,7 @@
 			);
 		}
 
-		window.muapp.PagerJumpPlugin.route('muapp://functionalExt/selectedContactInfo', (res = {}) => {
-			alert(JSON.stringify(res))
-    });
+		
 	</script>
 <script>
     var ua = window.navigator.userAgent.toLowerCase();
