@@ -53,7 +53,8 @@
 	
 	<div>capture="user"</div>
 	<input type="file" name="pic3" id="pic3" accept="video/*" capture="user" /> -->
-	<button id="J_btn" class="btn btn-default">判断权限</button>
+	<!-- <button id="J_btn" class="btn btn-default">判断权限</button> -->
+	<button id="J_btn2" class="btn btn-default">点我回跳</button>
 	
 	<!-- <h4>选择图片 capture="camera"</h4>
 	<input type="file" name="pic4" id="pic4" accept="image/*" capture="camera" />
@@ -61,33 +62,57 @@
 	<input type="file" name="pic4" id="pic4" accept="image/*" capture="user" /> -->
 
 	<script>
-		var btn = document.querySelector('#J_btn');
-		btn.addEventListener('click', function () {
-			window.muapp.PagerJumpPlugin.route('muapp://functionalExt/selectedContactInfo', function(res){
-				alert(JSON.stringify(res));
-				alert(res.userphone === '');
-				alert(!res.userphone);
-			});
-		});
+		// var btn = document.querySelector('#J_btn');
+		// btn.addEventListener('click', function () {
+		// 	window.muapp.PagerJumpPlugin.route('muapp://functionalExt/selectedContactInfo', function(res){
+		// 		alert(JSON.stringify(res));
+		// 		alert(res.userphone === '');
+		// 		alert(!res.userphone);
+		// 	});
+		// });
 
-		if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-			navigator.mediaDevices.getUserMedia({ audio: true, video: true })
-				.then(stream => alert('success1'))
-				.catch(err => alert('fail1' + err.toString()));
+		// if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+		// 	navigator.mediaDevices.getUserMedia({ audio: true, video: true })
+		// 		.then(stream => alert('success1'))
+		// 		.catch(err => alert('fail1' + err.toString()));
+		// } else {
+		// 	navigator.getUserMedia({ audio: true, video: true },
+		// 		function (stream) {
+		// 			alert('success2')
+		// 		},
+		// 		function (err) {
+		// 			alert('fail2' + err.toString())
+		// 		}
+		// 	);
+		// }
+
+	function getParamFromHash(key) {
+		const reg = new RegExp(`(^|&)${key}=([^&]*)(&|$)`);
+		const hashPos = window.location.hash.indexOf('?');
+		if (window.location.hash.indexOf('#') > -1) {
+			if (hashPos === -1) return undefined;
+			const r = window.location.hash.substr(hashPos + 1).match(reg);
+			if (r) return decodeURIComponent(r[2]);
+			return undefined;
 		} else {
-			navigator.getUserMedia({ audio: true, video: true },
-				function (stream) {
-					alert('success2')
-				},
-				function (err) {
-					alert('fail2' + err.toString())
-				}
-			);
+			const reg = new RegExp('[?&]' + key + '=([^&]+)', 'gmi');
+			const url = window.location.href;
+			if (reg.test(url)) return RegExp.$1;
+			return '';
 		}
+	};
 
+		document.querySelector('#J_btn2').addEventListener('click', function () {
+			var url = decodeURIComponent(getParamFromHash('cb'))
+			if (url) {
+				if(window.confirm("回调地址为: "+url)) {
+					window.location.href = url;
+				}
+			}	
+		});
 		
 	</script>
-<script>
+<!-- <script>
     var ua = window.navigator.userAgent.toLowerCase();
     if (/muapp\//i.test(ua)) {
       var scriptsList = [
@@ -115,7 +140,7 @@
       ];
       document.write(scriptsList.join(''));
     }
-  </script>
+  </script> -->
 </body>
 
 </html>
