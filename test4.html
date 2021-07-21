@@ -86,6 +86,11 @@
 		// 	);
 		// }
 
+	window.muapp.PagerJumpPlugin.route('muapp://functionalExt/checkPermission?permission=location&eventType=ET012&needRequest=1', function(res) {
+			// 成功回调
+			alert(res);
+		});
+
 	function getParamFromHash(key) {
 		const reg = new RegExp(`(^|&)${key}=([^&]*)(&|$)`);
 		const hashPos = window.location.hash.indexOf('?');
@@ -112,7 +117,7 @@
 		});
 		
 	</script>
-<!-- <script>
+<script>
     var ua = window.navigator.userAgent.toLowerCase();
     if (/muapp\//i.test(ua)) {
       var scriptsList = [
@@ -140,7 +145,7 @@
       ];
       document.write(scriptsList.join(''));
     }
-  </script> -->
+  </script>
 </body>
 
 </html>
