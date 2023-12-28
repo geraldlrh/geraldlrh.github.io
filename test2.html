@@ -18,206 +18,38 @@
   <!-- <link href="http://m-zl-st.cfcmu.cn/modules/muapp/vendors.css" rel="stylesheet"> -->
   <!-- <link href="http://m-zl-st.cfcmu.cn/modules/muapp/apply/pre_apply.css" rel="stylesheet"> -->
   <style>
-  	/*body, .wrap {
-  		height: 100%;
-  	}*/
-  	.wrap {
-  		/*height: 600px;
-  		overflow: auto;
-	    -webkit-overflow-scrolling: touch;
-	    box-sizing: border-box;
-	    position: relative;
-	    z-index: 1;*/
-  	}
-  	input {
-  		margin: 20px auto;
-  		width: 80%;
-  		height: 80px!important;
-  		line-height: 80px!important;
-  		font-size: 32px;
-  	}
+
   </style>
 </head>
 
-<body>
-	<!-- <div class="statusbar-overlay"></div>
-  <div class="panel-overlay"></div>
-  <div class="views">
-    <div class="view view-main">
-      <div class="pages">
-      	<div data-page="home" class="page navbar-fixed toolbar-fixed">
-				  <div class="navbar">
-				    <div class="navbar-inner">
-				      <div class="left">
-				        <a href="#native-app" class="link">
-				          <i class="icon icon-back"></i><span>返回</span>
-				        </a>
-				      </div>
-				      <div class="center">资格预审</div>
-				      <div class="right"></div>
-				    </div>
-				  </div>
-				  <div class="page-content page-pre-apply">    
-				    <div class="content-block-title">上传您本人处于有效期内的二代身份证：</div>
-				    <div class="list-block">
-				      <div class="list-group name-and-certId-wrap">
-				        <ul class="name-and-certId">
-				          <li>
-				            <div class="item-content">
-				              <div class="item-inner">
-				                <div class="item-title label">姓名</div>
-				                <div class="item-input">
-				                  <input type="text" name="custName" value="{{custName}}" placeholder="点击右侧按钮扫描" readonly>
-				                </div>
-				              </div>
-				            </div>
-				          </li>
-				          <li>
-				            <div class="item-content">
-				              <div class="item-inner">
-				                <div class="item-title label">身份证号</div>
-				                <div class="item-input">
-				                  <input class="small" type="text" name="custIdNo" value="{{custIdNo}}" readonly>
-				                </div>
-				              </div>
-				            </div>
-				          </li>
-				        </ul>
-				        <div class="camera{{#js_compare "this.custName && this.custIdNo"}} invalid{{/js_compare}}"></div>
-				      </div>
+<script src="https://gw.alipayobjects.com/as/g/h5-lib/alipayjsapi/3.1.1/alipayjsapi.inc.min.js"></script>
 
-				      <div class="list-group">
-				        <ul>
-				          <li>
-				            <div class="item-content item-link">
-				              <div class="item-inner">
-				                <div class="item-title label">职业</div>
-				                <div class="item-input">
-				                  <input class="picker-input" type="text" name="customerType" value="{{customerType}}" data-list="occupationList" data-init="0" readonly>
-				                </div>
-				              </div>
-				            </div>
-				          </li>
-				          <li class="employee-item">
-				            <div class="item-content item-link">
-				              <div class="item-inner">
-				                <div class="item-title label">月薪范围</div>
-				                <div class="item-input">
-				                  <input class="picker-input" type="text" name="monthSalary" value="{{monthSalary}}" data-list="monthSalaryList" data-init="0" readonly>
-				                </div>
-				              </div>
-				            </div>
-				          </li>
-				          <li class="employee-item last-li">
-				            <div class="item-content item-link">
-				              <div class="item-inner">
-				                <div class="item-title label">所在城市</div>
-				                <div class="item-input">
-				                  <input type="text" name="liveCityName" value="{{liveCityName}}" readonly>
-				                </div>
-				              </div>
-				            </div>
-				          </li>
+<button id="J_btn_url" class="btn btn-default">打开淘宝首页</button>
+<button id="J_btn_withData" class="btn btn-default">打开高德地图搜索页面</button>
+<button id="J_btn_pop" class="btn btn-default">打开微信小程序</button>
+<script>
+  var btnUrl = document.querySelector('#J_btn_url');
+  var btnWithData = document.querySelector('#J_btn_withData');
+  btnUrl.addEventListener('click', function(){
+    ap.pushWindow('https://m.taobao.com/#index');
+  });
+  btnWithData.addEventListener('click', function(){
+    ap.pushWindow({
+      url: 'http://uri.amap.com/search',
+      data: {
+        keyword: '美食',
+        city: '310100',
+        view: 'map'
+      }
+    });
+  });
 
-				          <li class="student-item">
-				            <div class="item-content item-link">
-				              <div class="item-inner">
-				                <div class="item-title label">学校地区</div>
-				                <div class="item-input">
-				                  <input name="schoolCityName" value="{{schoolCityName}}" type="text" readonly></input>
-				                </div>
-				              </div>
-				            </div>
-				          </li>
-				          <li class="student-item">
-				            <div class="item-content item-link">
-				              <div class="item-inner">
-				                <div class="item-title label">学校名称</div>
-				                <div class="item-input">
-				                  <input name="schoolName" value="{{schoolName}}" type="text" readonly></input>
-				                </div>
-				              </div>
-				            </div>
-				          </li>
-				        </ul>
-				      </div>
+  var btnPop = document.querySelector('#J_btn_pop');
+  btnPop.addEventListener('click', function(){
+    window.location.href = "weixin://dl/business/?appid=wx57a8a361d0da4756&path=pages/index/index"
+  });
 
-				      <div class="list-group">
-				        <ul>
-				          <li>
-				            <div class="item-content">
-				              <div class="item-inner">
-				                <div class="item-title label">银行卡号</div>
-				                <div class="item-input">
-				                  <input type="tel" name="bankCardNo" placeholder="输入银行卡号">
-				                </div>
-				              </div>
-				            </div>
-				            <i class="icon icon-camera-blue"></i>
-				          </li>
-				          <li>
-				            <div class="item-content item-link">
-				              <div class="item-inner">
-				                <div class="item-title label">开户行</div>
-				                <div class="item-input">
-				                  <input class="picker-input" type="text" name="orgName" data-list="bankOrgList" data-init="0" readonly>
-				                </div>
-				              </div>
-				            </div>
-				          </li>
-				          <li>
-				            <div class="item-content">
-				              <div class="item-inner">
-				                <div class="item-title label">手机号</div>
-				                <div class="item-input">
-				                  <input name="bankMobileNo" type="tel" placeholder="输入银行预留手机号码" maxlength="11">
-				                </div>
-				              </div>
-				            </div>
-				            <i class="icon icon-info-grey"></i>
-				          </li>
-				          <li>
-				            <div class="item-content">
-				              <div class="item-inner">
-				                <div class="item-title label">验证码</div>
-				                <div class="item-input">
-				                  <input type="tel" name="code" placeholder="短信验证码" maxlength="6">
-				                  <div class="sms-code-btn">获取验证码</div>
-				                </div>
-				              </div>
-				            </div>
-				          </li>
-				        </ul>
-				      </div>
-				    </div>
-				      
-				    <div class="content-block">
-				      <a href="#" class="button button-big button-fill submit-btn">提交</a>
-				      <div class="contract-wrap">
-				        <label class="agreement">
-				          <input type="checkbox" class="agreement-checkbox" />
-				            <span>我已阅读并同意&nbsp;</span><a href="#" class="contract-name">征信授权及支付扣款协议</a>
-				        </label>
-				      </div>
-				    </div>
-				  </div>
-				</div>
-      </div>
-    </div>
-  </div> -->
-	<div class="wrap">	
-		<h2>外滚动</h2>
-		<input type="text" placeholder="1">
-	  <input type="text" placeholder="2">
-	  <input type="text" placeholder="3">
-	  <input type="text" placeholder="4">
-	  <input type="text" placeholder="5">
-	  <input type="text" placeholder="6">
-	  <input type="text" placeholder="7">
-	  <input type="text" placeholder="8">
-	  <input type="text" placeholder="9">
-	  <input type="text" placeholder="10">  
-	</div>
-</body>
+  window.on
+</script>
 
 </html>
