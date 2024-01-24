@@ -81,7 +81,7 @@ const refresh = function () {
 const postMessageHandler = function () {
     swan.webView.postMessage({
         data: {
-            key: 'message'
+            key: 'message123'
         }
     });
 };
@@ -89,8 +89,8 @@ const postMessageHandler = function () {
 const backHandler = function () {
     swan.webView.navigateBack();
 };
-backHandler();
 postMessageHandler();
+backHandler();
 document.getElementById('navToSmart').onclick = navToSmart;
 document.getElementById('isSmartApp').onclick = isSmartApp;
 document.getElementById('refresh').onclick = refresh;
