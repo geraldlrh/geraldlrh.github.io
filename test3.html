@@ -89,6 +89,8 @@ const postMessageHandler = function () {
 const backHandler = function () {
     swan.webView.navigateBack();
 };
+backHandler();
+postMessageHandler();
 document.getElementById('navToSmart').onclick = navToSmart;
 document.getElementById('isSmartApp').onclick = isSmartApp;
 document.getElementById('refresh').onclick = refresh;
