@@ -216,6 +216,8 @@
 	<div class="wrap">	
 		<h2>内滚动</h2>
 		<a href="https://geraldlrh.github.io/test2.html?v=1111">H5链接2</a>
+		<br>
+		<button id="J_btn_pop2" class="btn btn-default">跳转原生页</button>
 		<input type="text" placeholder="1">
 	  <input type="text" placeholder="2">
 	  <input type="text" placeholder="3">
@@ -235,20 +237,36 @@
 	</script>
 
 	<script>
-		var initHeight = document.body.scrollHeight;
-		var footDom = document.getElementsByClassName('foot')[0];
-		window.onresize = function () {
-			if (document.body.scrollHeight < initHeight) {
-				footDom.style.display = 'none';
-			} else {
-				footDom.style.display = 'block';
-			}
-		}
+		// var initHeight = document.body.scrollHeight;
+		// var footDom = document.getElementsByClassName('foot')[0];
+		// window.onresize = function () {
+		// 	if (document.body.scrollHeight < initHeight) {
+		// 		footDom.style.display = 'none';
+		// 	} else {
+		// 		footDom.style.display = 'block';
+		// 	}
+		// }
 		
-		console.log(location.search);
-		setTimeout(function(){
-			console.log('location.search: '+location.search);
-		},2000);
+		// console.log(location.search);
+		// setTimeout(function(){
+		// 	console.log('location.search: '+location.search);
+		// },2000);
+		function ready() {
+			console.log(window.__wxjs_environment === 'miniprogram') // true
+			var btnPop = document.querySelector('#J_btn_pop2');
+			btnPop.addEventListener('click', function(){
+			wx.miniProgram.navigateTo({
+				url: '/index/index',
+			});
+			});
+		}
+		if (!window.WeixinJSBridge || !WeixinJSBridge.invoke) {
+			console.log(1111);
+			document.addEventListener('WeixinJSBridgeReady', ready, false)
+		} else {
+			console.log(2222);
+			ready()
+		}
 	</script>
 	<script type="text/javascript" src="https://res.wx.qq.com/open/js/jweixin-1.3.2.js"></script>
 </body>
