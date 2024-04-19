@@ -61,10 +61,8 @@
     });
   }
   if (!window.WeixinJSBridge || !WeixinJSBridge.invoke) {
-    console.log(1111);
     document.addEventListener('WeixinJSBridgeReady', ready, false)
   } else {
-    console.log(2222);
     ready()
   }
   

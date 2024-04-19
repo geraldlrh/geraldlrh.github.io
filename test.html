@@ -246,11 +246,23 @@
 		// 		footDom.style.display = 'block';
 		// 	}
 		// }
-		
-		console.log(location.search);
-		setTimeout(function(){
-			console.log('location.search: '+location.search);
-		},2000);
+
+		// setTimeout(function(){
+		// 	console.log('location.search: '+location.search);
+		// },2000);
+
+		// 改成 hash change
+		window.addEventListener(
+			"hashchange",
+			() => {
+				console.log(location.hash);
+				if(location.hash && location.hash.indexOf('result') !== -1) {
+					//拿到数据后，回退路由
+					history.go(-1);
+				}
+			},
+			false,
+		);
 		
 		function ready() {
 			console.log(window.__wxjs_environment === 'miniprogram') // true
