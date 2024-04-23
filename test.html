@@ -268,9 +268,10 @@
 			console.log(window.__wxjs_environment === 'miniprogram') // true
 			var btnPop = document.querySelector('#J_btn_pop2');
 			btnPop.addEventListener('click', function(){
-			wx.miniProgram.navigateTo({
-				url: '/pageA/index',
-			});
+				wx.miniProgram.postMessage({ data: 'foo' });
+				wx.miniProgram.navigateTo({
+					url: '/pageA/index',
+				});
 			});
 		}
 		if (!window.WeixinJSBridge || !WeixinJSBridge.invoke) {
