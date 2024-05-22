@@ -49,19 +49,6 @@
 		document.writeln('<script src="https://appx/web-view.min.js"' + '>' + '<' + '/' + 'script>');
 	}
 	</script>
-	<script>
-	// my.navigateTo({url: '../get-user-info/get-user-info'});
-	// 网页向小程序 postMessage 消息
-	my.postMessage({name:"测试web-view"});
-	// 接收来自小程序的消息。
-	my.onMessage = function(e) {
-		console.log(e); // {'sendToWebView': '1'}
-	}
-	// 判断是否运行在小程序环境里
-	my.getEnv(function(res) {
-		console.log(res.miniprogram) // true
-	});
-	</script>
 </head>
 
 <body>
@@ -80,7 +67,22 @@
 	<input type="file" name="pic4" id="pic4" accept="image/*" capture="camera" />
 	<p>前置摄像头 capture="user"</p>
 	<input type="file" name="pic4" id="pic4" accept="image/*" capture="user" /> -->
-
+	<script>
+		// my.navigateTo({url: '../get-user-info/get-user-info'});
+		// 网页向小程序 postMessage 消息
+		document.querySelector('#J_btn2').addEventListener('click', function () {
+			my.postMessage({name:"测试web-view"});
+		});
+		
+		// 接收来自小程序的消息。
+		my.onMessage = function(e) {
+			console.log(e); // {'sendToWebView': '1'}
+		}
+		// 判断是否运行在小程序环境里
+		my.getEnv(function(res) {
+			console.log(res.miniprogram) // true
+		});
+	</script>
 	<script>
 		// var btn = document.querySelector('#J_btn');
 		// btn.addEventListener('click', function () {
@@ -123,14 +125,14 @@
 		}
 	};
 
-		document.querySelector('#J_btn2').addEventListener('click', function () {
-			var url = decodeURIComponent(getParamFromHash('cb'))
-			if (url) {
-				if(window.confirm("回调地址为: "+url)) {
-					window.location.href = url;
-				}
-			}	
-		});
+		// document.querySelector('#J_btn2').addEventListener('click', function () {
+		// 	var url = decodeURIComponent(getParamFromHash('cb'))
+		// 	if (url) {
+		// 		if(window.confirm("回调地址为: "+url)) {
+		// 			window.location.href = url;
+		// 		}
+		// 	}	
+		// });
 		
 	</script>
 
