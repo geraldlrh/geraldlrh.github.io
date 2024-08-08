@@ -254,7 +254,7 @@
 		// 改成 hash change
 
 		throw new Error('error');
-		
+
 		window.addEventListener(
 			"hashchange",
 			() => {
@@ -279,9 +279,11 @@
 		}
 		if (!window.WeixinJSBridge || !WeixinJSBridge.invoke) {
 			console.log(1111);
+			throw new Error('error1');
 			document.addEventListener('WeixinJSBridgeReady', ready, false)
 		} else {
 			console.log(2222);
+			throw new Error('error2');
 			ready()
 		}
 	</script>
